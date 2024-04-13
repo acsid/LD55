@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://bbuqmutwydmi6"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_yyvm7"]
+[ext_resource type="Texture2D" uid="uid://lmctc3nalb4f" path="res://images/mana.png" id="3_1nggr"]
+[ext_resource type="Texture2D" uid="uid://cqq7jyduiwgeo" path="res://images/boat1.png" id="3_wlvqp"]
+[ext_resource type="Texture2D" uid="uid://2f40ogxwt4iq" path="res://images/boat2.png" id="4_osa25"]
+[ext_resource type="Texture2D" uid="uid://b21etqeaqvauv" path="res://images/boat3.png" id="5_ygak6"]
+[ext_resource type="Texture2D" uid="uid://cumctgyemk3fp" path="res://images/boat4.png" id="6_5wa4c"]
+[ext_resource type="Texture2D" uid="uid://dmll1nxo01rpb" path="res://images/boat5.png" id="7_bo46w"]
+[ext_resource type="Texture2D" uid="uid://ccukl5oftg0tu" path="res://images/boat6.png" id="8_wbrrh"]
+[ext_resource type="Texture2D" uid="uid://dt7e53k05vn4k" path="res://images/boat-running.png" id="9_1vhus"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l8phk"]
+radius = 21.0
+height = 118.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jgpc7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wlvqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_osa25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ygak6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5wa4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bo46w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wbrrh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_1vhus")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+floor_stop_on_slope = false
+script = ExtResource("1_yyvm7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_l8phk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-5, -69)
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Mana" type="Sprite2D" parent="."]
+position = Vector2(-52, -34)
+rotation = 2.13105
+texture = ExtResource("3_1nggr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jgpc7")
+animation = &"moving"
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://yournnrgfi2e"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_rbtks"]
+[ext_resource type="PackedScene" uid="uid://bbuqmutwydmi6" path="res://boat.tscn" id="1_s8b02"]
+[ext_resource type="PackedScene" uid="uid://cir06ea8anior" path="res://fish.tscn" id="3_bwogm"]
+[ext_resource type="PackedScene" uid="uid://bl8jwla7abi5q" path="res://lake.tscn" id="3_rowog"]
+[ext_resource type="Texture2D" uid="uid://lmctc3nalb4f" path="res://images/mana.png" id="4_ifkud"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_rbtks")
+
+[node name="Lake" parent="." instance=ExtResource("3_rowog")]
+
+[node name="boat" parent="." instance=ExtResource("1_s8b02")]
+position = Vector2(-94, 185)
+
+[node name="fish" parent="." instance=ExtResource("3_bwogm")]
+position = Vector2(389, -212)
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Container"]
+position = Vector2(28, 40)
+texture = ExtResource("4_ifkud")

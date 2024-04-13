@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl8jwla7abi5q"]
+
+[ext_resource type="Texture2D" uid="uid://cl3otjellarix" path="res://images/dock.png" id="1_fbha2"]
+[ext_resource type="Script" path="res://lake.gd" id="1_iy0a0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2fy2"]
+size = Vector2(110, 162)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crv33"]
+size = Vector2(95, 125)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8fxs4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_recuh"]
+size = Vector2(226, 476)
+
+[node name="Lake" type="Node2D"]
+position = Vector2(-320, 174)
+script = ExtResource("1_iy0a0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(92, 244)
+texture = ExtResource("1_fbha2")
+
+[node name="dock" type="Area2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dock"]
+position = Vector2(83, 196)
+shape = SubResource("RectangleShape2D_b2fy2")
+
+[node name="buymana" type="Area2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="buymana"]
+position = Vector2(187, 212)
+shape = SubResource("RectangleShape2D_crv33")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_8fxs4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-92, 228)
+shape = SubResource("RectangleShape2D_recuh")
+
+[connection signal="body_entered" from="dock" to="." method="_on_dock_body_entered"]
+[connection signal="body_exited" from="dock" to="." method="_on_dock_body_exited"]
+[connection signal="body_entered" from="buymana" to="." method="_on_buymana_body_entered"]
+[connection signal="body_exited" from="buymana" to="." method="_on_buymana_body_exited"]

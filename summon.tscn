@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://dsr1ov0l6s1ww"]
+
+[ext_resource type="Script" path="res://summon.gd" id="1_inhnr"]
+[ext_resource type="Texture2D" uid="uid://c1yo7jpqqusi6" path="res://images/boat.png" id="1_shrkh"]
+[ext_resource type="Texture2D" uid="uid://cqq7jyduiwgeo" path="res://images/boat1.png" id="3_mvvpn"]
+[ext_resource type="Texture2D" uid="uid://2f40ogxwt4iq" path="res://images/boat2.png" id="4_eqqrh"]
+[ext_resource type="Texture2D" uid="uid://b21etqeaqvauv" path="res://images/boat3.png" id="5_oh13h"]
+[ext_resource type="Texture2D" uid="uid://cumctgyemk3fp" path="res://images/boat4.png" id="6_u5vft"]
+[ext_resource type="Texture2D" uid="uid://dmll1nxo01rpb" path="res://images/boat5.png" id="7_d205g"]
+[ext_resource type="Texture2D" uid="uid://ccukl5oftg0tu" path="res://images/boat6.png" id="8_0io40"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bukij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mvvpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_eqqrh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_oh13h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u5vft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d205g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0io40")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="summon" type="Node2D"]
+script = ExtResource("1_inhnr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_shrkh")
+
+[node name="Fish" type="Timer" parent="."]
+autostart = true
+
+[node name="Despawn" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bukij")
+
+[connection signal="timeout" from="Fish" to="." method="_on_fish_timeout"]
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
