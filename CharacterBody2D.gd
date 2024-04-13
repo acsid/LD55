@@ -35,6 +35,10 @@ func _physics_process(delta):
 
 func _process(delta):
 	if velocity.x != 0:
+		if velocity.x > 0 :
+			$AnimatedSprite2D.scale.x = -1
+		if velocity.x < 0 :
+			$AnimatedSprite2D.scale.x = 1
 		$AnimatedSprite2D.play("moving")
 	else: 
 		$AnimatedSprite2D.play("default")
